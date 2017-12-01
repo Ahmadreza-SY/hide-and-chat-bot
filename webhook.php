@@ -1,5 +1,4 @@
-<?php
-
+<?php // vasslkj
 // requirements
 require 'vendor/autoload.php';
 require_once 'config.php';
@@ -8,7 +7,6 @@ require 'main-controller.php';
 use Telegram\Bot\Api;
 
 $tlg = new Tlg($admin_id, $token);
-
 
 try {
 	$tlg->run();
