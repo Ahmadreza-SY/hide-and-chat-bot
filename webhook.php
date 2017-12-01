@@ -9,6 +9,7 @@ use Telegram\Bot\Api;
 
 $tlg = new Tlg($admin_id, $token);
 
+
 try {
 	$tlg->run();
 } catch (Exception $e) {
