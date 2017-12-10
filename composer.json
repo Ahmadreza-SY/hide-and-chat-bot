@@ -1,18 +1,18 @@
 {
-    "name": "root/hide-and-chat-bot",
-    "description": "hide and char telegram bot",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Vahid Mohammadi",
-            "email": "email@vmoh.ir"
-        },
-        {
-            "name": "Ahmadreza Saboor",
-            "email": "ahmadreza.saboor2012@gmail.com"
-        }
-    ],
-    "require": {
-        "irazasyed/telegram-bot-sdk": "master-dev"
-    }
+	"name": "root/hide-and-chat-bot",
+	"description": "hide and char telegram bot",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Vahid Mohammadi",
+			"email": "email@vmoh.ir"
+		},
+		{
+			"name": "Ahmadreza Saboor",
+			"email": "ahmadreza.saboor2012@gmail.com"
+		}
+	],
+	"require": {
+		"irazasyed/telegram-bot-sdk": "master-dev"
+	}
 }
