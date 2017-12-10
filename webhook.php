@@ -6,7 +6,7 @@ require_once 'config.php';
 require 'main-controller.php';
 // file_get_contents('https://api.telegram.org/bot'.$token.'/sendMessage?chat_id='.$admin_id.'&text=debug');
 use Telegram\Bot\Api;
- //ewfjwel
+ //ewfjwelejfk
 $tlg = new Tlg($admin_id, $token);
 
 try {
