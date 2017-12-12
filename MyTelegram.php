@@ -78,7 +78,7 @@ class Tlg
         $this->resolve_new_user();
 
         if ($this->callback) { // User's clicked on a glassy button
-            $this->resolve_callback_queries();
+            // $this->resolve_callback_queries();
         } else { // User's sent a message
             if ($this->resolve_cancel_command()) {
                 return;
@@ -92,13 +92,14 @@ class Tlg
         $this->resolve_state();
     }
 
-    public function resolve_callback_queries()
+    /* public function resolve_callback_queries()
     {
         return Clbk::handle_callback($this->callback);
-    }
+    }*/
     public function resolve_keyboard_button()
     {
-        return Kbd::handle_button($this->message);
+        return false;
+        // return Kbd::handle_button($this->message);
     }
     public function resolve_commands()
     {
@@ -117,11 +118,11 @@ class Tlg
             return true;
         }
     }
-    public function set_callback_data($answer_data)
+    /* public function set_callback_data($answer_data)
     {
         //BR: bayad aval thread tamoom she bad answer_data javab dade beshe
         $this->telegram->answerCallbackQuery($answer_data);
-    }
+    } */
     public function resolve_state()
     {
         //BR
@@ -142,7 +143,7 @@ class Tlg
         }
     }
 
-    public function reply($text, $force_reply = false)
+    /* public function reply($text, $force_reply = false)
     {
         $chat_id = $this->get_chat_id();
         $data = [
@@ -157,9 +158,9 @@ class Tlg
 
         $data['reply_to_message_id'] = $this->get_message_id();
         $this->send_message($data);
-    }
+    } */
 
-    public function send_message_to_superadmin($messageObj)
+    /* public function send_message_to_superadmin($messageObj)
     {
         $this->send_message($messageObj);
     }
@@ -174,14 +175,14 @@ class Tlg
             $data['reply_markup'] = $reply_markup;
         }
         $this->send_message_to_superadmin($data);
-    }
+    } */
 
-    public function send_thank_message()
+    /* public function send_thank_message()
     {
         $this->reply(THANK_MESSAGE, false);
-    }
+    } */
 
-    public function reset_state($text = false)
+    /* public function reset_state($text = false)
     {
         if ($text !== false) {
             $reply_markup = get_initial_keyboard();
@@ -193,15 +194,15 @@ class Tlg
         }
         $this->db->reset_state();
         $this->db->reset_data();
-    }
+    } */
 
     // getters
-    public function get_chat_id()
+    /* public function get_chat_id()
     {
         return $this->chat_id;
     }
     public function get_message_id()
     {
         return $this->message_id;
-    }
+    } */
 }

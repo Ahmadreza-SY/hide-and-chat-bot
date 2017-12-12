@@ -25,17 +25,11 @@ class Db
     {
         return mysqli_query($this->db, "SELECT * FROM `chats` WHERE chat_id = '$this->chat_id' ");
     }
-    public function insert($text, $username = '', $fullname = '', $permission = 0, $data = '""', $etuts_user = '', $email = '')
+    public function insert($text, $username = '', $fullname = '', $permission = 0, $data = '""')
     {
         $default_cats = json_encode([0, 0, 0, 0, 0, 0]);
         $state = IDLE;
-        return mysqli_query($this->db, "INSERT INTO `chats` (chat_id, state, last_message, permission, data, username, fullname, cats, etuts_user, email) VALUES ('$this->chat_id', '$state', '$text', '$permission', '$data', '$username', '$fullname', '$default_cats', $etuts_user, $email) ");
-    }
-    public function set_email($email, $chat_id = false)
-    {
-        $chat_id = $this->get_chat_id($chat_id);
-
-        return mysqli_query($this->db, "UPDATE `chats` SET email = '$email' WHERE chat_id = '$chat_id' ");
+        return mysqli_query($this->db, "INSERT INTO `chats` (chat_id, state, last_message, permission, data, username, fullname) VALUES ('$this->chat_id', '$state', '$text', '$permission', '$data', '$username', '$fullname') ");
     }
     public function set_permission($permission, $chat_id = false)
     {
@@ -64,12 +58,6 @@ class Db
         return mysqli_query($this->db, "UPDATE `chats` SET data = '$data' WHERE chat_id = '$chat_id' ");
 
     }
-    public function set_etuts_user($etuts_user, $chat_id = false)
-    {
-        $chat_id = $this->get_chat_id($chat_id);
-
-        return mysqli_query($this->db, "UPDATE `chats` SET etuts_user = '$etuts_user' WHERE chat_id = '$chat_id' ");
-    }
     public function set_username($username, $chat_id = false)
     {
         $chat_id = $this->get_chat_id($chat_id);
@@ -87,29 +75,6 @@ class Db
         $chat_id = $this->get_chat_id($chat_id);
 
         return mysqli_query($this->db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$chat_id' ");
-    }
-    public function set_categories_checked_array($cats, $chat_id = false)
-    {
-        $chat_id = $this->get_chat_id($chat_id);
-
-        $cats = json_encode($cats);
-        $cats = addslashes($cats);
-        return mysqli_query($this->db, "UPDATE `chats` SET cats = '$cats' WHERE chat_id = '$chat_id' ");
-    }
-    public function get_chat_id_by_etuts_user($etuts_user)
-    {
-        if (empty($etuts_user)) {
-            return false;
-        }
-        $result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE etuts_user = '$etuts_user' ");
-        return (int) $result->fetch_assoc()['chat_id'];
-    }
-    public function get_email($chat_id = false)
-    {
-        $chat_id = $this->get_chat_id($chat_id);
-
-        $result = mysqli_query($this->db, "SELECT `email` FROM `chats` WHERE chat_id = '$chat_id' ");
-        return (int) $result->fetch_assoc()['email'];
     }
     public function get_state($chat_id = false)
     {
@@ -142,28 +107,12 @@ class Db
         $result = mysqli_query($this->db, "SELECT `fullname` FROM `chats` WHERE chat_id = '$chat_id' ");
         return (string) $result->fetch_assoc()['fullname'];
     }
-    public function get_etuts_user($chat_id = false)
-    {
-        $chat_id = $this->get_chat_id($chat_id);
-
-        $result = mysqli_query($this->db, "SELECT `etuts_user` FROM `chats` WHERE chat_id = '$chat_id' ");
-        return (string) $result->fetch_assoc()['etuts_user'];
-    }
     public function get_user_permission($chat_id = false)
     {
         $chat_id = $this->get_chat_id($chat_id);
 
         $result = mysqli_query($this->db, "SELECT `permission` FROM `chats` WHERE chat_id = '$chat_id' ");
         return (int) $result->fetch_assoc()['permission'];
-    }
-    public function get_categories_checked_array($chat_id = false)
-    {
-        $chat_id = $this->get_chat_id($chat_id);
-
-        $result = mysqli_query($this->db, "SELECT `cats` FROM `chats` WHERE chat_id = '$chat_id' ");
-        $cats = (string) $result->fetch_assoc()['cats'];
-        $cats = json_decode($cats, true);
-        return $cats;
     }
     public function reset_state($chat_id = false)
     {
@@ -245,33 +194,4 @@ $result = mysqli_query($this->db, "SELECT * FROM `channelposts`");
 return mysqli_num_rows($result);
 }
  */
-    // site_recommend_post table
-    public function add_site_recommend_post($post_line)
-    {
-        return mysqli_query($this->db, "INSERT INTO `site_recommend_posts` (post) VALUES ('$post_line') ");
-    }
-    public function get_site_recommend_post($id = 0)
-    {
-        $result = mysqli_query($this->db, "SELECT * FROM `site_recommend_posts` WHERE NOT state = '" . RESERVED . "' AND id > '$id' LIMIT 1 ");
-
-        if (mysqli_num_rows($result) == 0) {
-            return false;
-        }
-
-        $row = $result->fetch_assoc();
-        return $row;
-    }
-    public function set_site_recommend_post_state($state, $id = 1)
-    {
-        return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' WHERE id = $id ");
-    }
-    public function remove_last_site_recommend_post()
-    {
-        return mysqli_query($this->db, "DELETE FROM `site_recommend_posts` order by id desc LIMIT 1 ");
-    }
-    public function get_num_of_site_recommend_posts_left()
-    {
-        $result = mysqli_query($this->db, "SELECT * FROM `site_recommend_posts`");
-        return mysqli_num_rows($result);
-    }
 }
