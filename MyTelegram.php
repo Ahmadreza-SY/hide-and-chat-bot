@@ -1,4 +1,5 @@
 <?php
+use Telegram\Bot\Api;
 
 class Tlg
 {
