@@ -52,7 +52,8 @@ class Tlg
         $this->chat = $chat;
         $this->chat_id = $chat_id;
         $this->text = $text;
-        log_debug($this);
+        log_debug($this->message);
+        log_debug($this->callback);
     }
     public function __construct($admin_id, $token)
     {
@@ -60,6 +61,7 @@ class Tlg
         $this->token = $token;
         $this->telegram = new Api($token);
         $this->update = $this->telegram->getWebhookUpdates();
+        log_debug($this->update);
         $this->extract_update();
         $this->db = new Db($db_name, $db_user, $db_pass, $chat_id);
     }
