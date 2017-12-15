@@ -1,13 +1,13 @@
 <?php // vahid
 
 // requirements
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 require_once 'config.php';
-require 'main-controller.php';
+// require 'main-controller.php';
 file_get_contents('https://api.telegram.org/bot'.$token.'/sendMessage?chat_id='.$admin_id[0].'&text=debug');
 
 // $telegram = new Api($token);
-$tlg = new Tlg($admin_id, $token);
+// $tlg = new Tlg($admin_id, $token);
 
 /* try {
     $tlg->run();
