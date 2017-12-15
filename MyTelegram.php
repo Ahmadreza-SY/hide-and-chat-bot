@@ -52,6 +52,7 @@ class Tlg
         $this->chat = $chat;
         $this->chat_id = $chat_id;
         $this->text = $text;
+        log_debug($this);
     }
     public function __construct($admin_id, $token)
     {
