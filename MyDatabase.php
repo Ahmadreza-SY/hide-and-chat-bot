@@ -56,7 +56,6 @@ class Db
         $data = json_encode($data);
         $data = addslashes($data);
         return mysqli_query($this->db, "UPDATE `chats` SET data = '$data' WHERE chat_id = '$chat_id' ");
-
     }
     public function set_username($username, $chat_id = false)
     {
@@ -82,6 +81,12 @@ class Db
 
         $result = mysqli_query($this->db, "SELECT `state` FROM `chats` WHERE chat_id = '$chat_id' ");
         return (int) $result->fetch_assoc()['state'];
+    }
+    public function get_thread($chat_id = false) {
+        $chat_id = $this->get_chat_id($chat_id);
+
+        $result = mysqli_query($this->db, "SELECT `thread` FROM `chats` WHERE chat_id = '$chat_id' ");
+        return (int) $result->fetch_assoc()['thread'];
     }
     public function get_data($chat_id = false)
     {
